@@ -1,54 +1,72 @@
-% Zähler für Definitionen und Sätze
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{theorem-boxes}[2026/08/19 Theorem and definition boxes]
+
+% Das Paket lädt seine eigenen Abhängigkeiten und kann dadurch auch unabhängig
+% von template.cls verwendet werden.
+\RequirePackage[many]{tcolorbox}
+\RequirePackage{etoolbox}
+
+% ---------------------------------------------------------------------------
+% Zähler
+% ---------------------------------------------------------------------------
 \newcounter{definitioncounter}
 \newcounter{sentencecounter}
 \newcounter{lemmacounter}
-\newcounter{thoremcounter}
+\newcounter{theoremcounter}
 \newcounter{korollarcounter}
 \newcounter{samplecounter}
 \newcounter{proofcounter}
-
 \newcounter{blockcounter}
 
-
-
-% Inhaltsverzeichnis-Dateien für Definitionen und Sätze
-% Overleaf unterstützt auch Mehrfach-TOCs, wir erzeugen eigene "Dateien"
+% ---------------------------------------------------------------------------
+% Eigene Inhaltsverzeichnisse
+% ---------------------------------------------------------------------------
 \makeatletter
-\newcommand{\listofdefinitions}{
+
+\newcommand{\listofdefinitions}{%
   \section*{Inhaltsverzeichnis der Definitionen}
-  %\addcontentsline{toc}{section}{Inhaltsverzeichnis der Definitionen}
-  \@starttoc{lod} % lod = list of definitions
+  \@starttoc{lod}
 }
-\newcommand{\listofsentences}{
+
+\newcommand{\listofsentences}{%
   \section*{Inhaltsverzeichnis der Sätze}
-  %\addcontentsline{toc}{section}{Inhaltsverzeichnis der Sätze}
-  \@starttoc{los} % los = list of sentences
+  \@starttoc{los}
 }
-\newcommand{\listoflemmata}{
+
+\newcommand{\listoflemmata}{%
   \section*{Inhaltsverzeichnis der Lemmata}
-  %\addcontentsline{toc}{section}{Inhaltsverzeichnis der Sätze}
-  \@starttoc{lem} % los = list of sentences
-}
-\newcommand{\listoftheorems}{
-  \section*{Inhaltsverzeichnis der Theoremen}
-  %\addcontentsline{toc}{section}{Inhaltsverzeichnis der Sätze}
-  \@starttoc{teo} % los = list of sentences
+  \@starttoc{lem}
 }
 
-\newcommand{\listofkorollars}{
+\newcommand{\listoftheorems}{%
+  \section*{Inhaltsverzeichnis der Theoreme}
+  \@starttoc{teo}
+}
+
+\newcommand{\listofkorollars}{%
   \section*{Inhaltsverzeichnis der Korollare}
-  %\addcontentsline{toc}{section}{Inhaltsverzeichnis der Sätze}
-  \@starttoc{kor} % los = list of sentences
+  \@starttoc{kor}
 }
 
+\newcommand{\listofsamples}{%
+  \section*{Inhaltsverzeichnis der Beispiele}
+  \@starttoc{sam}
+}
 
+\newcommand{\listofproofs}{%
+  \section*{Inhaltsverzeichnis der Beweise}
+  \@starttoc{pro}
+}
 
 \makeatother
 
-% Umgebung sentence
+% ---------------------------------------------------------------------------
+% Boxen
+% ---------------------------------------------------------------------------
 \newtcolorbox[auto counter, number within=section]{sentence}[2][]{%
   tikznode boxed title,
   enhanced,
+  breakable,
   arc=0mm,
   interior style={white},
   attach boxed title to top center={yshift=-\tcboxedtitleheight/2},
@@ -59,11 +77,11 @@
   title={Satz%
     \ifstrempty{#2}{}{~-~#2}%
   },
-  label={sent:#1}, % optional
+  label={sent:#1},
   before upper={%
     \refstepcounter{sentencecounter}%
     \addcontentsline{los}{subsection}{Satz%
-        \ifstrempty{#2}{}{~-~#2}%
+      \ifstrempty{#2}{}{~-~#2}%
     }%
   }
 }
@@ -74,7 +92,7 @@
   breakable,
   arc=0mm,
   interior style={white},
-  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  attach boxed title to top center={yshift=-\tcboxedtitleheight/2},
   fonttitle=\bfseries,
   colbacktitle=white,
   coltitle=black,
@@ -82,22 +100,22 @@
   title={Definition%
     \ifstrempty{#2}{}{~-~#2}%
   },
-  label={lod:#1},
+  label={def:#1},
   before upper={%
     \refstepcounter{definitioncounter}%
     \addcontentsline{lod}{subsection}{Definition%
-        \ifstrempty{#2}{}{~-~#2}%
+      \ifstrempty{#2}{}{~-~#2}%
     }%
-  },
+  }
 }
-
 
 \newtcolorbox[auto counter, number within=section]{lemma}[2][]{%
   tikznode boxed title,
   enhanced,
+  breakable,
   arc=0mm,
   interior style={white},
-  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  attach boxed title to top center={yshift=-\tcboxedtitleheight/2},
   fonttitle=\bfseries,
   colbacktitle=white,
   coltitle=black,
@@ -107,19 +125,20 @@
   },
   label={lem:#1},
   before upper={%
-    \refstepcounter{definitioncounter}%
+    \refstepcounter{lemmacounter}%
     \addcontentsline{lem}{subsection}{Lemma%
       \ifstrempty{#2}{}{~-~#2}%
     }%
-  },
+  }
 }
 
 \newtcolorbox[auto counter, number within=section]{theorem}[2][]{%
   tikznode boxed title,
   enhanced,
+  breakable,
   arc=0mm,
   interior style={white},
-  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  attach boxed title to top center={yshift=-\tcboxedtitleheight/2},
   fonttitle=\bfseries,
   colbacktitle=white,
   coltitle=black,
@@ -127,21 +146,22 @@
   title={Theorem%
     \ifstrempty{#2}{}{~-~#2}%
   },
-  label={teo:#1},
+  label={theo:#1},
   before upper={%
-    \refstepcounter{thoremcounter}%
+    \refstepcounter{theoremcounter}%
     \addcontentsline{teo}{subsection}{Theorem%
       \ifstrempty{#2}{}{~-~#2}%
     }%
-  },
+  }
 }
 
 \newtcolorbox[auto counter, number within=section]{korollar}[2][]{%
   tikznode boxed title,
   enhanced,
+  breakable,
   arc=0mm,
   interior style={white},
-  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  attach boxed title to top center={yshift=-\tcboxedtitleheight/2},
   fonttitle=\bfseries,
   colbacktitle=white,
   coltitle=black,
@@ -149,15 +169,14 @@
   title={Korollar%
     \ifstrempty{#2}{}{~-~#2}%
   },
-  label={teo:#1},
+  label={kor:#1},
   before upper={%
     \refstepcounter{korollarcounter}%
     \addcontentsline{kor}{subsection}{Korollar%
       \ifstrempty{#2}{}{~-~#2}%
     }%
-  },
+  }
 }
-
 
 \newtcolorbox[auto counter, number within=section]{sample}[2][]{%
   tikznode boxed title,
@@ -165,7 +184,7 @@
   breakable,
   arc=0mm,
   interior style={white},
-  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  attach boxed title to top center={yshift=-\tcboxedtitleheight/2},
   fonttitle=\bfseries,
   colbacktitle=white,
   coltitle=black,
@@ -173,22 +192,22 @@
   title={Beispiel%
     \ifstrempty{#2}{}{~-~#2}%
   },
-  label={teo:#1},
+  label={sample:#1},
   before upper={%
     \refstepcounter{samplecounter}%
     \addcontentsline{sam}{subsection}{Beispiel%
       \ifstrempty{#2}{}{~-~#2}%
     }%
-  },
+  }
 }
 
 \newtcolorbox[auto counter, number within=section]{proof}[2][]{%
   tikznode boxed title,
   enhanced,
-  arc=0mm,
   breakable,
+  arc=0mm,
   interior style={white},
-  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  attach boxed title to top center={yshift=-\tcboxedtitleheight/2},
   fonttitle=\bfseries,
   colbacktitle=white,
   coltitle=black,
@@ -196,22 +215,22 @@
   title={Beweis%
     \ifstrempty{#2}{}{~-~#2}%
   },
-  label={teo:#1},
+  label={proof:#1},
   before upper={%
     \refstepcounter{proofcounter}%
     \addcontentsline{pro}{subsection}{Beweis%
       \ifstrempty{#2}{}{~-~#2}%
     }%
-  },
+  }
 }
 
 \newtcolorbox[auto counter, number within=section]{block}[2][]{%
   tikznode boxed title,
   enhanced,
-  arc=0mm,
   breakable,
+  arc=0mm,
   interior style={white},
-  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  attach boxed title to top center={yshift=-\tcboxedtitleheight/2},
   fonttitle=\bfseries,
   colbacktitle=white,
   coltitle=black,
@@ -219,11 +238,10 @@
   title={%
     \ifstrempty{#2}{}{#2}%
   },
-  label={teo:#1},
+  label={block:#1},
   before upper={%
     \refstepcounter{blockcounter}%
-    \addcontentsline{pro}{subsection}{%
-      \ifstrempty{#2}{}{#2}%
-    }%
-  },
+  }
 }
+
+\endinput

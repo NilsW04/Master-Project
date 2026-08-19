@@ -1,0 +1,104 @@
+\documentclass[11pt]{template}
+
+% Optional direkt außerhalb des Templates:
+% \documentclass[10pt]{template}
+% \documentclass[12pt]{template}
+%
+% Optional: Abstand zwischen Caption und Inhalt anpassen:
+% \setcaptiongap{1pt}
+
+\title{Praktikum Grundlagen der 3D Druck Technologien}
+\subtitle{Bericht}
+\author{Nils Würtz}
+\matrikelnummer{6376725}
+\fachbereich{3}
+\studiengang{Informatik Vollfach}
+\semester{Sommersemester 2026}
+
+\begin{document}
+
+\maketitle
+\makefrontmatter
+
+\chapter{Projektbeschreibung}
+
+\section{Projektumfeld}
+Hier beginnt der eigentliche Text.
+Hierbei ist es gutasdasdasd ada dasd adbadvakd vad ald adva sd adad odosdosobd sobd ob sob
+
+asd
+
+\section{Projektziel}
+Eine \ac{api} wird automatisch ausgeschrieben.
+
+\subsection{Abgrenzung}
+Beispieltext mit einer Fußnote.\footnote{Diese Fußnote wird mit 9 pt gesetzt.}
+
+\chapter{Projektvorbereitung}
+
+\section{Ist-Analyse}
+
+\begin{figure}[H]
+  \centering
+  \caption{Beispielabbildung}
+  \fbox{\rule{0pt}{3cm}\rule{5cm}{0pt}}
+  \source{Eigene Darstellung}
+  \label{fig:example}
+\end{figure}
+
+\section{Soll-Analyse}
+
+\begin{table}[H]
+  \centering
+  \caption{Beispieltabelle}
+  \begin{tabular}{ll}
+    \textbf{Eigenschaft} & \textbf{Wert} \\
+    Beispiel             & 42
+  \end{tabular}
+  \source{Eigene Darstellung}
+  \label{tab:example}
+\end{table}
+
+
+\section{Quellcode}
+
+\begin{documentcode}{CSharp}{Initialisierung eines Services}{Eigene Darstellung}
+public sealed class AppSdkService
+{
+    public void Initialize()
+    {
+        Console.WriteLine("Initialized");
+    }
+}
+\end{documentcode}
+
+\begin{documentcode}{TypeScript}{Beispiel einer TypeScript-Funktion}{Eigene Darstellung}
+function add(a: number, b: number): number {
+    return a + b;
+}
+\end{documentcode}
+
+% Weitere mögliche Sprachen:
+% Java, C, C++, Python, SQL, XML, JavaScript, JSON, CSharp, TypeScript
+
+% Harvard:
+% parenthetisch: (Knuth, 1984)
+Eine Beispielquelle ist \parencite{knuth1984}.
+
+% Mit Seitenangabe: (Knuth, 1984, S. 12)
+Ein konkreter Seitenverweis ist \parencite[12]{knuth1984}.
+
+% Textuell: Knuth (1984)
+\textcite{knuth1984} beschreibt ...
+
+\printreferences
+
+\startappendices
+
+\appendixentry{Quellcode XYZ}
+Hier steht der Quellcode oder ein Verweis darauf.
+
+\appendixentry{Physischer Netzwerkplan}
+Hier steht der Netzwerkplan.
+
+\end{document}
