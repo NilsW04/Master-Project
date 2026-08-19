@@ -1,0 +1,229 @@
+% Zähler für Definitionen und Sätze
+\newcounter{definitioncounter}
+\newcounter{sentencecounter}
+\newcounter{lemmacounter}
+\newcounter{thoremcounter}
+\newcounter{korollarcounter}
+\newcounter{samplecounter}
+\newcounter{proofcounter}
+
+\newcounter{blockcounter}
+
+
+
+% Inhaltsverzeichnis-Dateien für Definitionen und Sätze
+% Overleaf unterstützt auch Mehrfach-TOCs, wir erzeugen eigene "Dateien"
+\makeatletter
+\newcommand{\listofdefinitions}{
+  \section*{Inhaltsverzeichnis der Definitionen}
+  %\addcontentsline{toc}{section}{Inhaltsverzeichnis der Definitionen}
+  \@starttoc{lod} % lod = list of definitions
+}
+\newcommand{\listofsentences}{
+  \section*{Inhaltsverzeichnis der Sätze}
+  %\addcontentsline{toc}{section}{Inhaltsverzeichnis der Sätze}
+  \@starttoc{los} % los = list of sentences
+}
+\newcommand{\listoflemmata}{
+  \section*{Inhaltsverzeichnis der Lemmata}
+  %\addcontentsline{toc}{section}{Inhaltsverzeichnis der Sätze}
+  \@starttoc{lem} % los = list of sentences
+}
+\newcommand{\listoftheorems}{
+  \section*{Inhaltsverzeichnis der Theoremen}
+  %\addcontentsline{toc}{section}{Inhaltsverzeichnis der Sätze}
+  \@starttoc{teo} % los = list of sentences
+}
+
+\newcommand{\listofkorollars}{
+  \section*{Inhaltsverzeichnis der Korollare}
+  %\addcontentsline{toc}{section}{Inhaltsverzeichnis der Sätze}
+  \@starttoc{kor} % los = list of sentences
+}
+
+
+
+\makeatother
+
+% Umgebung sentence
+\newtcolorbox[auto counter, number within=section]{sentence}[2][]{%
+  tikznode boxed title,
+  enhanced,
+  arc=0mm,
+  interior style={white},
+  attach boxed title to top center={yshift=-\tcboxedtitleheight/2},
+  fonttitle=\bfseries,
+  colbacktitle=white,
+  coltitle=black,
+  boxed title style={size=normal, colframe=white, boxrule=0pt},
+  title={Satz%
+    \ifstrempty{#2}{}{~-~#2}%
+  },
+  label={sent:#1}, % optional
+  before upper={%
+    \refstepcounter{sentencecounter}%
+    \addcontentsline{los}{subsection}{Satz%
+        \ifstrempty{#2}{}{~-~#2}%
+    }%
+  }
+}
+
+\newtcolorbox[auto counter, number within=section]{definition}[2][]{%
+  tikznode boxed title,
+  enhanced,
+  breakable,
+  arc=0mm,
+  interior style={white},
+  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  fonttitle=\bfseries,
+  colbacktitle=white,
+  coltitle=black,
+  boxed title style={size=normal, colframe=white, boxrule=0pt},
+  title={Definition%
+    \ifstrempty{#2}{}{~-~#2}%
+  },
+  label={lod:#1},
+  before upper={%
+    \refstepcounter{definitioncounter}%
+    \addcontentsline{lod}{subsection}{Definition%
+        \ifstrempty{#2}{}{~-~#2}%
+    }%
+  },
+}
+
+
+\newtcolorbox[auto counter, number within=section]{lemma}[2][]{%
+  tikznode boxed title,
+  enhanced,
+  arc=0mm,
+  interior style={white},
+  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  fonttitle=\bfseries,
+  colbacktitle=white,
+  coltitle=black,
+  boxed title style={size=normal, colframe=white, boxrule=0pt},
+  title={Lemma%
+    \ifstrempty{#2}{}{~-~#2}%
+  },
+  label={lem:#1},
+  before upper={%
+    \refstepcounter{definitioncounter}%
+    \addcontentsline{lem}{subsection}{Lemma%
+      \ifstrempty{#2}{}{~-~#2}%
+    }%
+  },
+}
+
+\newtcolorbox[auto counter, number within=section]{theorem}[2][]{%
+  tikznode boxed title,
+  enhanced,
+  arc=0mm,
+  interior style={white},
+  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  fonttitle=\bfseries,
+  colbacktitle=white,
+  coltitle=black,
+  boxed title style={size=normal, colframe=white, boxrule=0pt},
+  title={Theorem%
+    \ifstrempty{#2}{}{~-~#2}%
+  },
+  label={teo:#1},
+  before upper={%
+    \refstepcounter{thoremcounter}%
+    \addcontentsline{teo}{subsection}{Theorem%
+      \ifstrempty{#2}{}{~-~#2}%
+    }%
+  },
+}
+
+\newtcolorbox[auto counter, number within=section]{korollar}[2][]{%
+  tikznode boxed title,
+  enhanced,
+  arc=0mm,
+  interior style={white},
+  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  fonttitle=\bfseries,
+  colbacktitle=white,
+  coltitle=black,
+  boxed title style={size=normal, colframe=white, boxrule=0pt},
+  title={Korollar%
+    \ifstrempty{#2}{}{~-~#2}%
+  },
+  label={teo:#1},
+  before upper={%
+    \refstepcounter{korollarcounter}%
+    \addcontentsline{kor}{subsection}{Korollar%
+      \ifstrempty{#2}{}{~-~#2}%
+    }%
+  },
+}
+
+
+\newtcolorbox[auto counter, number within=section]{sample}[2][]{%
+  tikznode boxed title,
+  enhanced,
+  breakable,
+  arc=0mm,
+  interior style={white},
+  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  fonttitle=\bfseries,
+  colbacktitle=white,
+  coltitle=black,
+  boxed title style={size=normal, colframe=white, boxrule=0pt},
+  title={Beispiel%
+    \ifstrempty{#2}{}{~-~#2}%
+  },
+  label={teo:#1},
+  before upper={%
+    \refstepcounter{samplecounter}%
+    \addcontentsline{sam}{subsection}{Beispiel%
+      \ifstrempty{#2}{}{~-~#2}%
+    }%
+  },
+}
+
+\newtcolorbox[auto counter, number within=section]{proof}[2][]{%
+  tikznode boxed title,
+  enhanced,
+  arc=0mm,
+  breakable,
+  interior style={white},
+  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  fonttitle=\bfseries,
+  colbacktitle=white,
+  coltitle=black,
+  boxed title style={size=normal, colframe=white, boxrule=0pt},
+  title={Beweis%
+    \ifstrempty{#2}{}{~-~#2}%
+  },
+  label={teo:#1},
+  before upper={%
+    \refstepcounter{proofcounter}%
+    \addcontentsline{pro}{subsection}{Beweis%
+      \ifstrempty{#2}{}{~-~#2}%
+    }%
+  },
+}
+
+\newtcolorbox[auto counter, number within=section]{block}[2][]{%
+  tikznode boxed title,
+  enhanced,
+  arc=0mm,
+  breakable,
+  interior style={white},
+  attach boxed title to top center = {yshift=-\tcboxedtitleheight/2},
+  fonttitle=\bfseries,
+  colbacktitle=white,
+  coltitle=black,
+  boxed title style={size=normal, colframe=white, boxrule=0pt},
+  title={%
+    \ifstrempty{#2}{}{#2}%
+  },
+  label={teo:#1},
+  before upper={%
+    \refstepcounter{blockcounter}%
+    \addcontentsline{pro}{subsection}{%
+      \ifstrempty{#2}{}{#2}%
+    }%
+  },
+}

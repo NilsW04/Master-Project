@@ -1,0 +1,57 @@
+\ProvidesPackage{nwumacros}
+
+% --- benötigte Pakete ---
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{xcolor}
+\RequirePackage{mathtools}
+
+\definecolor{darkgreen}{RGB}{0, 100, 0}
+\definecolor{darkyellow}{RGB}{204, 204, 0}
+
+% --- Makros ---
+\newcommand*{\bfrac}[2]{\genfrac{\lbrace}{\rbrace}{0pt}{}{#1}{#2}}
+\newcommand*{\blue}[1]{\textcolor{blue}{{#1}}}
+\newcommand*{\ab}[1]{\textcolor{blue}{{$#1$}}}
+\newcommand*{\red}[1]{\textcolor{red}{{#1}}}
+\newcommand*{\green}[1]{\textcolor{darkgreen}{{#1}}}
+\newcommand*{\ag}[1]{\textcolor{darkgreen}{{$#1$}}}
+\newcommand*{\orange}[1]{\textcolor{orange}{{#1}}}
+\newcommand*{\yellow}[1]{\textcolor{darkyellow}{{#1}}}
+
+\newcommand*{\gray}[1]{\textcolor{gray}{{#1}}}
+\newcommand*{\amt}[1]{\ensuremath{\lvert #1 \rvert}}
+\newcommand*{\vct}[1]{\begin{pmatrix} {#1} \end{pmatrix}}
+\newcommand{\defas}{:=}
+\newcommand*{\euro}{\text{€}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\renewcommand{\C}{\mathcal{C}}
+
+
+\newcommand{\dist}{\text{dist}}
+\newcommand{\lev}{\text{lev}}
+\newcommand{\val}{\text{val}}
+\newcommand{\ex}{\text{ex}}
+
+\newcommand{\blank}{\text{\scalebox{1.5}[.6]{$\sqcup$}}}
+
+
+\newcommand{\erun}[2]{\overset{#1}{\Longrightarrow}_\mathcal{\ifstrempty{#2}{A}{#2}}}
+\newcommand{\run}[2]{\overset{#1}{\longrightarrow}_\mathcal{\ifstrempty{#2}{A}{#2}}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\lrangle}[1]{\langle #1 \rangle}
+\renewcommand{\dq}[1]{\glqq #1\grqq}
+
+\newcommand{\anhref}[1]{%
+    \hyperref[#1]{Anhang~\ref*{#1}}%
+}
+
+
+
+\endinput
